@@ -7,19 +7,29 @@ namespace CommerceProject.Model
 {
     public class Order
     {
+        // you will see that most of the work is done in the "CheckOut" Method.
         public void Checkout(Cart cart, PaymentDetails paymentDetails, bool notifyCustomer)
         {
+            // Problem 1: "Cash" Transactions do not need "Credit Card" Processing
             if (paymentDetails.PaymentMethod == PaymentMethod.CreditCard)
             {
                 ChargeCard(paymentDetails, cart);
             }
 
+            // Problem 2: Point Of Sale Transactions Do not need Inventory Reservations
             ReserveInventory(cart);
 
+            // Problem 3: Point Of Sale Transactions do not need email notifications
+            // the customer does not provide an email
+            // the customer knows immediately that the order was success
             if(notifyCustomer)
             {
                 NotifyCustomer(cart);
             }
+
+            // Problem 4: Any Change to notifications, Credit Card processing, Or Inventory
+            // management will affect "Order" as well as the "Web" and "Point Of Sale"
+            // implementations of "Order"
         }
 
         public void NotifyCustomer(Cart cart)
