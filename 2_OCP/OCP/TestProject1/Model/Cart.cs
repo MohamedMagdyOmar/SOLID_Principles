@@ -45,6 +45,12 @@ namespace CommerceProject.Model
                     total -= setsOfThree*.2m;
                 }
                 // more rules are coming!
+                // since there is more rules are coming, we have to think how we can change
+                // the code in such a way that let us not to change this particular method
+                // for every new change.
+
+                // so if we have new rule, we have to add new "if else" statement
+                // for adding new rule.
             }
             return total;
         }
